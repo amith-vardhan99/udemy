@@ -8,8 +8,13 @@ from xgboost import *
 from datetime import *
 
 base = os.getcwd()
+print(base)
 file = base + "/xgb_model_2.pkl"
-model = pickle.load(open(file, "rb"))
+with open(file, 'rb') as file_open:
+    content = file_open.read()
+    print(content)
+#with open(file, 'rb') as file_open:
+    #model = pickle.load(file_open)
 
 reg = XGBRegressor()
 
