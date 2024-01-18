@@ -2,19 +2,16 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import pickle
+import joblib
 import os
 from xgboost import *
 from datetime import *
 
 base = os.getcwd()
 print(base)
-file = base + "/xgb_model_2.pkl"
-with open(file, 'rb') as file_open:
-    content = file_open.read()
-    print(content)
-#with open(file, 'rb') as file_open:
-    #model = pickle.load(file_open)
+file = base + "/xgb_model_2.joblib"
+file_open = open(file, 'rb')
+model = joblib.load(filename=file_open)
 
 reg = XGBRegressor()
 
@@ -44,4 +41,4 @@ def retrieve_data_frame_for_plotting_graph(ini,fin):
 
     df_future_dates = pd.DataFrame(date_range)
 
-    return df_future_dates
+    return df_future_dates,future_dates

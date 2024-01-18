@@ -7,25 +7,26 @@ from flask import *
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template("index.html")
 
-@app.route('/', methods=['GET','POST'])
+@app.route("/", methods=["GET","POST"])
 def predict():
-    initial_date = request.form['fd']
-    final_date = request.form['td']
-    df = retrieve_data_frame_for_plotting_graph(initial_date,final_date)
+    initial_date = request.form["fd"]
+    final_date = request.form["td"]
+    df,future_dates = retrieve_data_frame_for_plotting_graph(initial_date,final_date)
     features = df.columns.values
     future_values = model.predict(df[features])
-    future_df = pd.DataFrame(data={'Predictions':future_values}, index = df.index)
-    plt.switch_backend('Agg')
-    plt.figure(figsize=(20,5))
-    plt.plot(future_df['Predictions'])
+    future_df = pd.DataFrame(data={"Prediction" : future_values}, index = future_dates)
+    plt.switch_backend("Agg")
+    fig,ax = plt.subplots(figsize=(20,5))
+    sns.lineplot(ax=ax,x=future_dates,y=future_df["Prediction"])
+    ax.set(title="Predicted Renewable Energy")
     file_to_save = base + "/static/output.png"
     plt.savefig(file_to_save)
 
-    return render_template('index.html')
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
