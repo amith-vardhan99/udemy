@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import sys
-sys.path.append('C:/Users/amith/Documents/GitHub/udemy/Predicting Diamond Sales Price with Multiple Regression Methods/templates')
+sys.path.append('C:/Users/amith/Documents/GitHub/udemy/Predicting Diamond Sales Price with Multiple Regression Methods')
 from model import model
 import os
 
@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 path = os.getcwd().replace("\\","/")
 list_of = ""
-with open("model/list_of_features.txt","r+") as fl:
+with open("C:/Users/amith/Documents/GitHub/udemy/Predicting Diamond Sales Price with Multiple Regression Methods/model/list_of_features.txt","r+") as fl:
     list_of = fl.read()
 list_of = list_of.split("\n")
 list_of_features = list_of[0].split(", ")
