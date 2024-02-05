@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+import sys
+sys.path.append('C:/Users/amith/Documents/GitHub/udemy/Predicting Diamond Sales Price with Multiple Regression Methods/templates')
 from model import model
 import os
 
@@ -45,3 +47,4 @@ def submit():
 
 if __name__ == "__main__":
     app.run(debug=True)
+#%%
