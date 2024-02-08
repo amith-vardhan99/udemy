@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamond Price Prediction</title>
+</head>
+<body>
+<h1>This is the diamond price prediction model</h1>
+
+<h2>Enter Values as mentioned:</h2>
+<form id="diamondForm">
+    <input type="text" name="cut" placeholder="cut">
+    <input type="text" name="color" placeholder="color">
+    <!-- Other input fields... -->
+
+    <input type="submit" value="Predict Price">
+</form>
+
+<div id="predictedPrice" style="display: none;">
+    <h2>Predicted Price:</h2>
+    <span id="predictedValue"></span>
+</div>
+
+<script>
+    document.getElementById('diamondForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Add your JavaScript logic to handle form submission and predict price
+        // Display the predicted price in the 'predictedValue' span
+        var predictedPrice = /* Your calculated price */;
+        document.getElementById('predictedValue').textContent = predictedPrice;
+        document.getElementById('predictedPrice').style.display = 'block';
+    });
+</script>
+</body>
+</html>
