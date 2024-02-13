@@ -7,5 +7,4 @@ from datetime import *
 model = tf.keras.models.load_model("model.joblib")
 mms = joblib.load("scaler.joblib")
 
-no_of_window_samples = 240
-
+cont = np.load()
