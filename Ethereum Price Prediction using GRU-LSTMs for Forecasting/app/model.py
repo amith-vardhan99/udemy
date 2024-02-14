@@ -4,8 +4,8 @@ import tensorflow as tf
 import joblib
 from datetime import *
 
-model = tf.keras.models.load_model("app/model.keras")
-mms = joblib.load("app/scaler.joblib")
+model = tf.keras.models.load_model("model.keras")
+mms = joblib.load("scaler.joblib")
 
 cont = np.load("closing price window and target.npz")
 
