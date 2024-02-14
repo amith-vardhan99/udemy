@@ -19,14 +19,12 @@ def predict():
     future_end_date = request.form["td"]
     future_dates = generate_dates(future_end_date)
     new_targets = generate_future_targets(future_dates)
-    output = []
-    out = np.append(df["Close"].values,new_targets)
     plt.switch_backend("Agg")
     plt.figure(figsize=(20,6))
     plt.figure(facecolor="black",dpi=300)
     ax = plt.axes()
     ax.set_facecolor("black")
-    plt.plot(out[30000:],linewidth=0.5,color="red",label="Future")
+    plt.plot(new_targets,linewidth=0.5,color="red",label="Future")
     plt.plot(df.Close.values[30000:],linewidth=0.5,color="white",label="Past")
     plt.legend()
 
