@@ -12,7 +12,7 @@ df = df.sort_index()
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("templates/index.html")
 
 @app.route("/", methods=["GET","POST"])
 def predict():
@@ -25,12 +25,12 @@ def predict():
     ax = plt.axes()
     ax.set_facecolor("black")
     plt.plot(new_targets,linewidth=0.5,color="red",label="Future")
-    plt.plot(df.Close.values[30000:],linewidth=0.5,color="white",label="Past")
+    plt.plot(df["Close"],linewidth=0.5,color="white",label="Past")
     plt.legend()
 
-    plt.savefig("output.png")
+    plt.savefig("static/output.png")
 
-    return render_template("index.html")
+    return render_template("templates/index.html")
 
 
 
