@@ -12,7 +12,7 @@ df = df.sort_index()
 
 @app.route("/")
 def home():
-    return render_template("templates/index.html")
+    return render_template("/templates/index.html")
 
 @app.route("/", methods=["GET","POST"])
 def predict():
@@ -28,9 +28,9 @@ def predict():
     plt.plot(df["Close"],linewidth=0.5,color="white",label="Past")
     plt.legend()
 
-    plt.savefig("static/output.png")
+    plt.savefig("/static/output.png")
 
-    return render_template("templates/index.html")
+    return render_template("/templates/index.html")
 
 
 

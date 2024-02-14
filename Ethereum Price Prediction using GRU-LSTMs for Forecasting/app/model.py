@@ -71,3 +71,7 @@ def generate_future_targets(future_dates):
     y_pred = mms.inverse_transform(y_test.reshape(-1,1))
 
     return y_pred
+
+if __name__ == '__main__':
+    future_dates = input("Enter the date : ")
+    y_generate = generate_future_targets(future_dates)
