@@ -4,35 +4,38 @@ import tensorflow as tf
 import joblib
 from datetime import *
 
-model = tf.keras.models.load_model("model.keras")
-mms = joblib.load("scaler.joblib")
+def get_model_train_val():
+    model = tf.keras.models.load_model("model.keras")
+    mms = joblib.load("scaler.joblib")
 
-cont = np.load("closing price window and target.npz")
+    cont = np.load("closing price window and target.npz")
 
-X = cont["window"]
-y = cont["target"]
-length = cont["window_size"]
+    X = cont["window"]
+    y = cont["target"]
+    length = cont["window_size"]
 
-X_train_val = mms.fit_transform(X)
-y_train_val = mms.fit_transform(y.reshape(-1,1))
+    X_train_val = mms.fit_transform(X)
+    y_train_val = mms.fit_transform(y.reshape(-1,1))
 
-train_val_threshold = round(0.8 * X.shape[0])
-length_of_window = length
+    train_val_threshold = round(0.8 * X.shape[0])
+    length_of_window = length
 
-X_train = X_train_val[:train_val_threshold]
-y_train = y_train_val[:train_val_threshold]
+    X_train = X_train_val[:train_val_threshold]
+    y_train = y_train_val[:train_val_threshold]
 
-X_val = X_train_val[train_val_threshold:]
-y_val = y_train_val[train_val_threshold:]
+    X_val = X_train_val[train_val_threshold:]
+    y_val = y_train_val[train_val_threshold:]
 
-train_rows =  X_train.shape[0]
-val_rows = X_val.shape[0]
+    train_rows =  X_train.shape[0]
+    val_rows = X_val.shape[0]
 
-X_train = X_train.reshape(train_rows, 1, length_of_window)
-X_val = X_val.reshape(val_rows, 1, length_of_window)
+    X_train = X_train.reshape(train_rows, 1, length_of_window)
+    X_val = X_val.reshape(val_rows, 1, length_of_window)
 
-model.compile(optimizer=tf.keras.optimizers.Adam(), loss=tf.keras.losses.mean_squared_error)
-model.fit(X_train, y_train, validation_data = (X_val, y_val), epochs=100, batch_size=32, verbose=1, shuffle=True, callbacks=tf.keras.callbacks.EarlyStopping(patience=2))
+    model.compile(optimizer=tf.keras.optimizers.Adam(), loss=tf.keras.losses.mean_squared_error)
+    model.fit(X_train, y_train, validation_data = (X_val, y_val), epochs=100, batch_size=32, verbose=1, shuffle=True, callbacks=tf.keras.callbacks.EarlyStopping(patience=2))
+
+    return X_train, y_train, X_val, y_val, model, X_train_val, y_train_val, mms
 
 def generate_dates(future_end_date):
     future_start_date = "2020-04-16 01:00:00"
@@ -43,6 +46,8 @@ def generate_dates(future_end_date):
     return future_dates
 
 def generate_future_targets(future_dates):
+
+    X_train, y_train, X_val, y_val, model, X_train_val, y_train_val, mms = get_model_train_val()
 
     X_test = []
     y_test = []

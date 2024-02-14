@@ -3,7 +3,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
-from model import *
+from model import generate_dates, generate_future_targets
 
 app = Flask(__name__)
 
@@ -39,3 +39,5 @@ def predict():
 if __name__ == "__main__":
     app.run(debug=True)
 
+
+#%%
