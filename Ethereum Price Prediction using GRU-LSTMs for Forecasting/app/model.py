@@ -72,6 +72,6 @@ def generate_future_targets(future_dates):
 
     return y_pred
 
-if __name__ == '__main__':
-    future_dates = input("Enter the date : ")
-    y_generate = generate_future_targets(future_dates)
+#if __name__ == '__main__':
+ #   future_dates = input("Enter the date : ")
+  #  y_generate = generate_future_targets(future_dates)

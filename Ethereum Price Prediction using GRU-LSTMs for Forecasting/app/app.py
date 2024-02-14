@@ -5,14 +5,15 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from model import generate_dates, generate_future_targets
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder="C:/Users/amith/Documents/GitHub/udemy/Ethereum Price Prediction using GRU-LSTMs for Forecasting/app/templates")
+
 
 df = pd.read_csv("ETH_1H.csv",parse_dates=["Date"],index_col=["Date"])
 df = df.sort_index()
 
 @app.route("/")
 def home():
-    return render_template("/templates/index.html")
+    return render_template("C:/Users/amith/Documents/GitHub/udemy/Ethereum Price Prediction using GRU-LSTMs for Forecasting/app/templates/index.html")
 
 @app.route("/", methods=["GET","POST"])
 def predict():
@@ -28,11 +29,9 @@ def predict():
     plt.plot(df["Close"],linewidth=0.5,color="white",label="Past")
     plt.legend()
 
-    plt.savefig("/static/output.png")
+    plt.savefig("C:/Users/amith/Documents/GitHub/udemy/Ethereum Price Prediction using GRU-LSTMs for Forecasting/app/static/output.png")
 
-    return render_template("/templates/index.html")
-
-
+    return render_template("C:/Users/amith/Documents/GitHub/udemy/Ethereum Price Prediction using GRU-LSTMs for Forecasting/app/templates/index.html")
 
 
 
