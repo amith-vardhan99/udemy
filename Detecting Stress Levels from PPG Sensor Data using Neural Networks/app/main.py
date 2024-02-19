@@ -15,9 +15,7 @@ def hello():
                 entries.append(float(request.form[i]))
             except ValueError:
                 entries.append(request.form[i])
-        p = predict(np.array(entries).reshape(-1,1))
-        p = np.argmax(p[0])
-
+        p = predict(entries)[0]
         if p == 0:
             st = "No Stress"
         elif p == 1:
