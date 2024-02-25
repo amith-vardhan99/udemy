@@ -20,6 +20,6 @@ def image_preprocessing(img_path):
     img = img.reshape((1,128,128,1))
     return img
 
-def predict_result(img, model):
+def predict_result(img):
     pred = int(model.predict(img,verbose=0)[0][0])
     return pred

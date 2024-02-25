@@ -30,13 +30,10 @@ def upload_file():
         data = image_preprocessing(path)
         s = predict_result(data)
         if s == 1:
-            result = 'No Brain Cancer'
+            result = 'Brain Tumour is not present'
         else:
-            result = 'Brain Cancer'
+            result = 'Brain Tumour is present'
     return render_template('index.html',result=result)
-
-
-
 
 
 if __name__ == "__main__":
