@@ -1,23 +1,21 @@
 import keras
 import numpy as np
 from matplotlib.pyplot import imshow
-from PIL import Image, ImageOps
+import cv2
 
 
-base = '/Users/adityavs14/Documents/Internship/Pianalytix/COVID/app'
-model = keras.models.load_model(f'{base}/CovidTest.h5')
+base = 'C:\\Users\\amith\\Documents\\GitHub\\udemy\\7 - COVID-19 Detection from CT Scans using ResNet, DenseNet, and VGG Mode\\app'
+model = keras.models.load_model(f'{base}\\CovidTest.h5')
 
 def image_pre(path):
     print(path)
-    data = np.ndarray(shape=(1,128, 128, 1), dtype=np.float32)
-    size = (128,128)
-    image = Image.open(path)
-    image = ImageOps.grayscale(image)
-    image = ImageOps.fit(image, size, Image.ANTIALIAS)
-    image_array = np.asarray(image)
-    data = image_array.reshape((-1,128,128,1))/255
+    image = cv2.imread(path)
+    image = cv2.cvtColor(src=image, code=cv2.COLOR_BGR2GRAY)
+    image = cv2.resize(src=image,dsize=(64,64))
+    data = image.reshape((64,64,1))
+    data = data / 255.0
     return data
 
 def predict(data):
-    prediction = model.predict(data)
-    return np.round(prediction[0][0])
+    prediction = model.predict(data.reshape(1,64,64,1))[0][0]
+    return np.int64(np.round(prediction))
