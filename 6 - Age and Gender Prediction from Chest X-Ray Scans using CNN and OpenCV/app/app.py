@@ -7,7 +7,7 @@ from model import image_preprocess,image_predict
 app = Flask(__name__)
 
 
-UPLOAD_FOLDER = 'C:\\Users\\amith\\Documents\\GitHub\\udemy\\Age and Gender Prediction from Chest X-Ray Scans using CNN and OpenCV\\app\\static'
+UPLOAD_FOLDER = 'C:\\Users\\amith\\Documents\\GitHub\\udemy\\6 - Age and Gender Prediction from Chest X-Ray Scans using CNN and OpenCV\\app\\static'
 ALLOWED_EXTENSIONS = set(['png'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
