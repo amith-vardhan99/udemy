@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request
+from flask import *
 import numpy as np
 import os
-from model import image_pre,predict
+from model import *
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -9,7 +9,7 @@ import pandas as pd
 app = Flask(__name__)
 
 
-UPLOAD_FOLDER = 'C:\\Users\\amith\\Documents\\GitHub\\udemy\\7 - COVID-19 Detection from CT Scans using ResNet, DenseNet, and VGG Mode\\app\\static\\'
+UPLOAD_FOLDER = 'C:\\Users\\amith\\Documents\\GitHub\\udemy\\7 - COVID-19 Detection from CT Scans using ResNet, DenseNet, and VGG Mode\\app\\static'
 
 ALLOWED_EXTENSIONS = set(['png'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -30,9 +30,9 @@ def upload_file():
         data = image_pre(path)
         s = predict(data)
         if s == 1:
-            result = 'No COVID detected'
-        else:
             result = 'COVID detected'
+        else:
+            result = 'No COVID detected'
     return render_template('index.html',result=result) 
 
 

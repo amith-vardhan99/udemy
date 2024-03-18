@@ -1,19 +1,19 @@
 import keras
 import numpy as np
-from matplotlib.pyplot import imshow
+import matplotlib.pyplot as plt
 import cv2
 
 
-base = 'C:\\Users\\amith\\Documents\\GitHub\\udemy\\7 - COVID-19 Detection from CT Scans using ResNet, DenseNet, and VGG Mode\\app'
-model = keras.models.load_model(f'{base}\\CovidTest.h5')
+path = "C:\\Users\\amith\\Documents\\GitHub\\udemy\\7 - COVID-19 Detection from CT Scans using ResNet, DenseNet, and VGG Mode\\app"
+model = keras.models.load_model(f'{path}\\model.h5')
 
-def image_pre(path):
-    print(path)
-    image = cv2.imread(path)
-    image = cv2.cvtColor(src=image, code=cv2.COLOR_BGR2GRAY)
-    image = cv2.resize(src=image,dsize=(64,64))
-    data = image.reshape((64,64,1))
-    data = data / 255.0
+def image_pre(file_name):
+    image_name = path + "\\" + file_name
+    img = cv2.imread(image_name)
+    img_grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img_resized = cv2.resize(src=img_grey,dsize=(64,64))
+    data = img_resized / 255.0
+    data = data.reshape((64,64,1))
     return data
 
 def predict(data):
