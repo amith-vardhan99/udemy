@@ -9,7 +9,7 @@ from model import image_pre,predict
 app = Flask(__name__)
 
 
-UPLOAD_FOLDER = '/Users/adityavs14/Documents/Internship/Pianalytix/Deep_Fake/app/static'
+UPLOAD_FOLDER = "C:\\Users\\amith\\Documents\\GitHub\\udemy\\8 - Detecting DeepFakes with ResNet and CNN\\app\\static"
 ALLOWED_EXTENSIONS = set(['jpg'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
