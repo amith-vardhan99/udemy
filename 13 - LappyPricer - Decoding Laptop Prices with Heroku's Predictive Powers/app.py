@@ -27,6 +27,24 @@ ips = st.radio(label="Does your screen use In-Plane Switching (IPS) technology?"
 ssd = st.selectbox(label="Select the size of SSD",options=[0, 1, 8, 16, 32, 128, 180, 240, 256, 500, 512, 1024, 2048])
 hdd = st.selectbox(label="Select the size of SSD",options=[0, 1, 8, 16, 32, 128, 180, 240, 256, 500, 512, 1024, 2048])
 
-screen_length = st.text_input
-screen_width
+screenlength = st.text_area(label="Enter the length of the screen")
+screenwidth = st.text_area(label="Enter the width of the screen")
+inches = st.text_area(label="Enter the number of inches for the screen")
 
+ppi = np.sqrt(screenlength * screenlength + screenwidth * screenwidth)/inches
+
+#model = 
+
+print(company)
+print(typename)
+print(cpu)
+print(ram)
+print(gpu)
+print(opsys)
+print(weight)
+print(touchscreen)
+print(ips)
+print(ssd)
+print(hdd)
+print(ppi)
+print()
