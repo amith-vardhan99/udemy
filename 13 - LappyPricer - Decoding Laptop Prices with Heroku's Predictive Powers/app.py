@@ -3,12 +3,11 @@ import numpy as np
 
 st.title("Laptop Price Predictor")
 
-company = st.selectbox(label="Select the company of your laptop",options=('Lenovo', 'Dell', 'Acer', 'Toshiba', 'MSI', 'HP', 'Asus', 'Huawei','Apple', 'Samsung', 'Mediacom', 'Razer', 'Fujitsu', 'Xiaomi' 'Google', 'Microsoft', 'Chuwi', 'Vero', 'LG'))
+company = st.selectbox(label="Select the company of your laptop",options=('Acer', 'Apple', 'Asus', 'Chuwi', 'Dell', 'Fujitsu', 'HP', 'Huawei', 'LG', 'Lenovo', 'MSI', 'Mediacom', 'Microsoft', 'Razer', 'Samsung', 'Toshiba', 'Vero', 'XiaomiGoogle'))
 
-typename = st.selectbox(label="Select the type of your laptop",options=('Notebook', '2 in 1 Convertible', 'Ultrabook', 'Gaming',
-       'Workstation', 'Netbook'))
+typename = st.selectbox(label="Select the type of your laptop",options=('2 in 1 Convertible', 'Gaming', 'Netbook', 'Notebook', 'Ultrabook', 'Workstation'))
 
-cpu = st.selectbox("Select the CPU your laptop uses",options=('Intel Core i7', 'Intel Core m', 'Intel Core i5','Intel Celeron Quad Core', 'Intel Atom', 'Intel Core i3','AMD E-Series', 'AMD A6-Series', 'Intel Pentium Quad Core','Intel Celeron Dual Core', 'AMD Fx', 'AMD A12-Series','AMD A10-Series', 'Samsung Cortex', 'AMD A8-Series','AMD A9-Series', 'Intel Pentium Dual Core', 'AMD Ryzen 1700','Intel Xeon', 'AMD A4-Series', 'AMD Ryzen 1600'))
+cpu = st.selectbox("Select the CPU your laptop uses",options=('AMD A10-Series', 'AMD A12-Series', 'AMD A4-Series', 'AMD A6-Series', 'AMD A8-Series', 'AMD A9-Series', 'AMD E-Series', 'AMD Fx', 'AMD Ryzen 1600', 'AMD Ryzen 1700', 'Intel Atom', 'Intel Celeron Dual Core', 'Intel Celeron Quad Core', 'Intel Core i3', 'Intel Core i5', 'Intel Core i7', 'Intel Core m', 'Intel Pentium Dual Core', 'Intel Pentium Quad Core', 'Intel Xeon', 'Samsung Cortex'))
 
 ram = st.text_input(label="Enter the size of your laptop's RAM")
 ram = ram.strip()
@@ -17,7 +16,7 @@ if ram == "":
 else:
     ram = int(ram)
 
-gpu = st.selectbox(label="Select the GPU your laptop uses",options=('Nvidia', 'Intel', 'AMD', 'ARM'))
+gpu = st.selectbox(label="Select the GPU your laptop uses",options=('AMD', 'ARM', 'Intel', 'Nvidia'))
 
 opsys = st.selectbox(label="Enter the operating system your laptop uses",options=('Windows', 'Chrome OS', 'No OS', 'Android', 'Linux', 'Mac'))
 
