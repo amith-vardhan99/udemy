@@ -9,17 +9,25 @@ warnings.filterwarnings("ignore")
 from preprocess import *
 import streamlit as st
 
-df = preprocess("WhatsApp Chat with CodeAcuity.txt")
-df_no_groups = df[df["User"]!="Group Notification"]
-list_of_users = np.sort(df_no_groups["User"].unique())
-
-user_messages = {}
-
-user_messages["Overall"] = df_no_groups["Message"].values
-
-for i in list_of_users:
-    user_messages[i] = df_no_groups[df_no_groups["User"]==i]["Message"].values
 
 side_title = st.sidebar.title("WhatsApp Chat Analyser")
-file_name = st.sidebar.file_uploader(label="Choose a file from the computer")
-print(file_name)
+file = st.sidebar.file_uploader(label="Choose a file from the computer")
+
+if file is not None:
+    file_name = file.name
+
+    df = preprocess(file_name=file_name)
+    df_no_groups = df[df["User"]!="Group Notification"]
+    list_of_users = np.sort(df_no_groups["User"].unique())
+
+    user_messages = {}
+    user_messages["Overall"] = df_no_groups["Message"].values
+    for i in list_of_users:
+        user_messages[i] = df_no_groups[df_no_groups["User"]==i]["Message"].values
+    
+    list_of_users = list(user_messages.keys())
+
+
+    user = st.sidebar.selectbox(label="Select the person with respect to whom analysis should be made",options=list_of_users)
+
+    
