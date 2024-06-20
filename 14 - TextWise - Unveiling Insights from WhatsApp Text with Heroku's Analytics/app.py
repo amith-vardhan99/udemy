@@ -8,10 +8,13 @@ import warnings
 warnings.filterwarnings("ignore")
 from preprocess import *
 import streamlit as st
+from stats import *
+
 
 
 side_title = st.sidebar.title("WhatsApp Chat Analyser")
 file = st.sidebar.file_uploader(label="Choose a file from the computer")
+
 
 if file is not None:
     file_name = file.name
@@ -30,4 +33,34 @@ if file is not None:
 
     user = st.sidebar.selectbox(label="Select the person with respect to whom analysis should be made",options=list_of_users)
 
+    cols = st.columns(4)
+
+    counting_parameters = retrieve_all_counting_parameters(user_messages,user)
+
+    with cols[0]:
+        st.header("Total Messages")
+        st.title(counting_parameters[0])
+    with cols[1]:
+        st.header("Total No. of Words")
+        st.title(counting_parameters[1])
+    with cols[2]:
+        st.header("Media Shared")
+        st.title(counting_parameters[2])
+    with cols[3]:
+        st.header("Total Links Shared")
+        st.title(counting_parameters[3])
     
+    st.header("Most Busy Users")
+
+    cols = st.columns(2)
+
+    ax,df_user_counts = return_busy_users(file_name=file_name,df=df)
+
+    
+    plt.savefig("amith.png")
+
+
+    with cols[0]:
+        st.pyplot(fig=ax)
+    with cols[1]:
+        st.write(df_user_counts)    
