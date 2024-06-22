@@ -63,4 +63,10 @@ if file is not None:
     with cols[0]:
         st.pyplot(fig=ax)
     with cols[1]:
-        st.write(df_user_counts)    
+        st.write(df_user_counts)
+
+    st.header("Word Cloud")
+    
+    ax_2 = return_wordcloud(user_messages,user)
+    
+    st.pyplot(fig=ax_2)

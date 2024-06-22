@@ -8,6 +8,7 @@ import warnings
 warnings.filterwarnings("ignore")
 from preprocess import *
 import streamlit as st
+from wordcloud import *
 
 def retrieve_all_counting_parameters(user_messages,user):
     messages = user_messages[user]
@@ -47,3 +48,33 @@ def return_busy_users(file_name,df):
     plt.xticks(rotation=45)
 
     return ax,df_user_counts
+
+def return_wordcloud(user_messages,user):
+    messages = user_messages[user]
+        
+    total_messages = len(messages)
+        
+    words_5 = ""
+    for i in messages:
+        words_5 += (i + " ")
+        
+    words_4 = re.sub(pattern="(https://\S+\s+)",repl="",string=words_5)
+    words_3 = re.sub(pattern="(<Media omitted>)",repl="",string=words_4)
+    words_2 = re.sub(pattern="(<This message was edited>)",repl="",string=words_3)
+    words_11 = words_2.replace("\n", " ")
+    words_1 = words_11.replace(".","")
+    words = words_1.split(" ")
+
+    while "" in words:
+        words.remove("")
+
+    text = ""
+    for i in words:
+        text += (i + " ")
+    
+    wc = WordCloud(width=400,height=400,margin=4,random_state=np.random.randint(0,1000))
+    word_cloud = wc.generate(text)
+    ax = plt.figure()
+    plt.imshow(word_cloud)
+
+    return ax
