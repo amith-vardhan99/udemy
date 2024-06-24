@@ -66,7 +66,32 @@ if file is not None:
         st.write(df_user_counts)
 
     st.header("Word Cloud")
+    if user == "Sai Kiran Code Acuity":
+        st.write("No Word Cloud for "+user)
+    else:
+        ax_2 = return_wordcloud(user_messages,user)
+        st.pyplot(fig=ax_2)
+
+    st.header("Most common words")
+
+    ax_3 = return_most_common_words(user_messages,user)
+
+    st.pyplot(fig=ax_3)
+
+    st.header("Emoji Analysis")
+
+    emoji_count,emoji_count_percentage = retrieve_emoji_count(user_messages,user)
+
+    colus = st.columns(2)
+
+    with colus[0]:
+        st.write(emoji_count)
+    with colus[1]:
+        st.write(emoji_count_percentage)
+
+    st.header("Monthly Timeline")
+
+    ax_5 = retrieve_monthly_timeline(df_no_groups,user)
+
+    st.pyplot(fig=ax_5)
     
-    ax_2 = return_wordcloud(user_messages,user)
-    
-    st.pyplot(fig=ax_2)
