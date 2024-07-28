@@ -202,3 +202,62 @@ def retrieve_monthly_timeline(df_no_groups,user):
     plt.ylabel("Number of words ------>")
 
     return ax_5
+
+def retrieve_activity_maps(df_no_groups,user):
+    if user == "Overall":
+        df_month_dayname = df_no_groups.copy()
+    else:
+        df_month_dayname = df_no_groups[df_no_groups["User"]==user].reset_index(drop=True)
+
+    df_month_dayname = df_month_dayname[["Month","Day Name"]]
+
+    list_of_months = {
+        "January":0,
+        "February":0,
+        "March":0,
+        "April":0,
+        "May":0,
+        "June":0,
+        "July":0,
+        "August":0,
+        "September":0,
+        "October":0,
+        "November":0,
+        "December":0
+    }
+    list_of_daynames = {
+        "Sunday":0,
+        "Monday":0,
+        "Tuesday":0,
+        "Wednesday":0,
+        "Thursday":0,
+        "Friday":0,
+        "Saturday":0
+    }
+
+    for i in list_of_months:
+        mon = df_month_dayname["Month"][df_month_dayname["Month"] == i].count()
+        list_of_months[i] = mon
+
+    for i in list_of_daynames:
+        dayname = df_month_dayname["Day Name"][df_month_dayname["Day Name"] == i].count()
+        list_of_daynames[i] = dayname
+
+    list_of_months = pd.Series(list_of_months).reset_index()
+    list_of_months.columns = ["Month","Number of Messages"]
+    list_of_daynames = pd.Series(list_of_daynames).reset_index()
+    list_of_daynames.columns = ["Week Day","Number of Messages"]
+
+    ax_7 = plt.figure()
+    plt.bar(x=list_of_months["Month"],height=list_of_months["Number of Messages"],color="green")
+    plt.xlabel("Month ------>")
+    plt.ylabel("Number of Messages ------>")
+    plt.xticks(rotation=45)
+
+    ax_8 = plt.figure()
+    plt.bar(x=list_of_daynames["Week Day"],height=list_of_daynames["Number of Messages"],color="purple")
+    plt.xlabel("Week Day ------>")
+    plt.ylabel("Number of Messages ------>")
+    plt.xticks(rotation=45)
+
+    return ax_7,ax_8

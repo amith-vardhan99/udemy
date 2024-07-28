@@ -94,4 +94,15 @@ if file is not None:
     ax_5 = retrieve_monthly_timeline(df_no_groups,user)
 
     st.pyplot(fig=ax_5)
-    
+
+    st.header("Activity Maps")
+
+    columns_count = st.columns(2)
+    ax_6,ax_7 = retrieve_activity_maps(df_no_groups,user)
+
+    with columns_count[0]:
+        st.write("Most Busy Day")
+        st.pyplot(fig=ax_6)
+    with columns_count[1]:
+        st.write("Most Busy Month")
+        st.pyplot(fig=ax_7)
